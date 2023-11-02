@@ -53,9 +53,9 @@ while true; do
     echo ""
     prompt_input "Digite o Email para ativação do seu SSL (ex: certificado.ssl@gmail.com)" emaill
     echo ""
-    prompt_input "Digite o nome da sua empresa (ex: RPA)" client
+    prompt_input "Digite o nome da sua Empresa (ex: RPA)" client
     echo ""
-    echo "ATENÇÃO ⚠️ CRIE UM TOKEN DE 32 CARACTERES OU USE O QUE JA ESTÁ AQUI⚠️: https://codebeautify.org/generate-random-hexadecimal-numbers"
+    echo "ATENÇÃO ⚠️ CRIE UM TOKEN DE 32 CARACTERES OU USE O QUE JA ESTÁ AQUI ⚠️: https://codebeautify.org/generate-random-hexadecimal-numbers"
     prompt_input "Já foi gerado uma ApiKey Global automaticamente ( Pode copiar: $key):" keyy    
     
 
@@ -65,8 +65,8 @@ while true; do
     echo ""
     echo "Domínio da API: $dominio"
     echo "Porta da API: $porta"
-    echo "Porta da API: $emaill"
-    echo "Nome da API: $client"
+    echo "O Email para ativação do SSL: $emaill"
+    echo "Nome da EMPRESA: $client"
     echo "ApiKey Global: $keyy"
     echo ""
     read -p "Digite 'Y' para continuar ou 'N' para corrigir: " confirmacao
@@ -335,15 +335,18 @@ clear
 
 echo ""
 echo ""
-echo "Clique ou copie o link aqui para abrir a sua Evolution-API https://$dominio/manager"
+echo "Clique ou copie o link para abrir a sua Evolution-API https://$dominio"
 echo "Sua ApiKey Global: $keyy"
 echo ""
 echo ""
 
-cd ~/instalador_T_N_E
+cd
+
+cd /home/ubuntu/install_P_T_TY_N_E_W_C_
 
 # Retorna para o instalador.sh
 # Exibe uma mensagem de confirmação
+echo ""
 read -p "Deseja voltar para o MENU PRINCIPAL? (Y/N): " choice
 
 # Verifica a escolha do usuário
