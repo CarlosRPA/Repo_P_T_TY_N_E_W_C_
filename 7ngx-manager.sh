@@ -1,15 +1,22 @@
 #!/bin/bash
 
-# Exibe o banner informativo
-display_banner
+#########################################################
 
-# Função para verificar se o usuário é root (sudo)
-check_root() {
-  if [[ $EUID -ne 0 ]]; then
-    echo "Este script deve ser executado como root (sudo)." 
-    exit 1
-  fi
-}
+clear
+
+echo -e "\e[32m
+
+        ██████╗ ██╗   ██╗    ██████╗ ██████╗  █████╗ 
+        ██╔══██╗╚██╗ ██╔╝    ██╔══██╗██╔══██╗██╔══██╗
+        ██████╔╝ ╚████╔╝     ██████╔╝██████╔╝███████║
+        ██╔══██╗  ╚██╔╝      ██╔══██╗██╔═══╝ ██╔══██║
+        ██████╔╝   ██║       ██║  ██║██║     ██║  ██║
+        ╚═════╝    ╚═╝       ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝\e[0m"
+echo -e "\e[32m                          BY RPA                                      \e[0m"
+echo -e "\e[32m                  AUTOR ==> CARLOS FRAZÃO <==                           \e[0m"
+echo -e "\e[32m\e[0m"
+
+#########################################################
 
 # Função para instalar Docker e Docker Compose, se necessário
 install_docker() {
