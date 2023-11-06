@@ -77,6 +77,12 @@ echo ""
 
 clear
 
+echo -e "\n\033[31m              ╔════════════════════════════════════════════════════════╗\033[0m"
+echo -e "\033[31m              ║                                                        ║\033[0m"
+echo -e "\033[31m              ║  \033[34m   Verifique se os dados abaixos estão ccorretos      \033[31m║\033[0m"
+echo -e "\033[31m              ║                                                        ║\033[0m"
+echo -e "\033[31m              ╚════════════════════════════════════════════════════════╝\033[0m\n"
+
 echo ""
 echo -e "Dominio do Appsmith: \e[33m$linkappsmith\e[0m"
 echo -e "Porta do Appsmith: \e[33m$portaappsmith\e[0m"
