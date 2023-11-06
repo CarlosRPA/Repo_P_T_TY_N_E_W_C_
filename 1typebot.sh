@@ -31,11 +31,11 @@ echo ""
 echo ""
 while true; do
 
-    read -p "Qual é a versão do Typebot que você deseja instalar (ex: ultima atualização 'latest'): " versionn
+    read -p "Qual é a versão do Typebot que você deseja instalar (ex: 'latest' | ex: v2.19.0): " versionn
 
     while [ -z "$versionn" ]; do
         echo "Resposta inválida. A versão do Typebot não pode ser vazio."
-        read -p "Qual é a versão do Typebot que você deseja instalar (ex: ultima atualização 'latest'): " versionn
+        read -p "Qual é a versão do Typebot que você deseja instalar (ex: 'latest' | ex: v2.19.0): " versionn
     done
 
     read -p "Qual é o seu domínio para o Typebot (ex: typebot.seudominio.com): " builder
@@ -116,13 +116,11 @@ while true; do
 
     clear  
 
-echo -e "\n\033[31m              ╔════════════════════════════════════════════════════════╗\033[0m"
-echo -e "\033[31m              ║                                                        ║\033[0m"
-echo -e "\033[31m              ║  \033[34m            Verifique com muita atenção               \033[31m║\033[0m"
-echo -e "\033[31m              ║                                                        ║\033[0m"
-echo -e "\033[31m              ╚════════════════════════════════════════════════════════╝\033[0m\n"
-
-    
+    echo -e "\n\033[31m              ╔════════════════════════════════════════════════════════╗\033[0m"
+    echo -e "\033[31m              ║                                                        ║\033[0m"
+    echo -e "\033[31m              ║  \033[34m   Verifique se os dados abaixos estão ccorretos      \033[31m║\033[0m"
+    echo -e "\033[31m              ║                                                        ║\033[0m"
+    echo -e "\033[31m              ╚════════════════════════════════════════════════════════╝\033[0m\n"
 
     echo ""
     echo -e "\e[31mAs informações fornecidas estão corretas?\e[0m"
@@ -424,19 +422,17 @@ sudo certbot --nginx --email $email --redirect --agree-tos  -d $builder -d $view
 
 cd
 
-cd
-
 clear
 
-cd /home/ubuntu/instalador_T_N_E_W_C_
+cd /home/ubuntu/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
 
-# Retorna para o instalador.sh
+# Retorna para o servidor.sh
 # Exibe uma mensagem de confirmação
 read -p "Deseja voltar para o MENU PRINCIPAL? (Y/N): " choice
 
 # Verifica a escolha do usuário
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ]; then
-  sudo chmod +x instalador.sh && ./instalador.sh
+  sudo chmod +x servidor.sh && ./servidor.sh
   echo "Comando executado."
 elif [ "$choice" == "N" ] || [ "$choice" == "n" ]; then
   echo "Comando não executado. Continuando..."
