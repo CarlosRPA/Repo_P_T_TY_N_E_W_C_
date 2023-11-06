@@ -60,6 +60,13 @@ while true; do
     
 
     # Pergunte ao usuário se as informações estão corretas
+
+    echo -e "\n\033[31m              ╔════════════════════════════════════════════════════════╗\033[0m"
+    echo -e "\033[31m              ║                                                        ║\033[0m"
+    echo -e "\033[31m              ║  \033[34m   Verifique se os dados abaixos estão ccorretos      \033[31m║\033[0m"
+    echo -e "\033[31m              ║                                                        ║\033[0m"
+    echo -e "\033[31m              ╚════════════════════════════════════════════════════════╝\033[0m\n"
+
     echo ""    
     echo "As informações fornecidas estão corretas?"
     echo ""
@@ -342,16 +349,17 @@ echo ""
 
 cd
 
-cd /home/ubuntu/install_P_T_TY_N_E_W_C_
+clear
 
-# Retorna para o instalador.sh
+cd /home/ubuntu/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
+
+# Retorna para o servidor.sh
 # Exibe uma mensagem de confirmação
-echo ""
 read -p "Deseja voltar para o MENU PRINCIPAL? (Y/N): " choice
 
 # Verifica a escolha do usuário
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ]; then
-  sudo chmod +x instalador.sh && ./instalador.sh
+  sudo chmod +x servidor.sh && ./servidor.sh
   echo "Comando executado."
 elif [ "$choice" == "N" ] || [ "$choice" == "n" ]; then
   echo "Comando não executado. Continuando..."
