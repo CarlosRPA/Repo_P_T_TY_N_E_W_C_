@@ -49,7 +49,7 @@ echo -e "\e[93mPasso \e[33m7/7\e[0m"
 read -p "Senha do seu Email (se for Gmail precisa ser senha de aplicativo): " senhaemailchatwoot
 echo ""
 echo -e "\e[93mPasso \e[33m7/7\e[0m"
-read -p "Digite a versão do Node.json (ex: ultima atualização latest): " versionn
+read -p "Digite a versão do Node.json (ex: "latest" | ex: v3.2.0): " versionn
 echo ""
 
 
@@ -57,12 +57,10 @@ echo ""
 ###############################################################
 
 clear
-
-echo ""
 echo ""
 echo -e "\n\033[31m              ╔════════════════════════════════════════════════════════╗\033[0m"
 echo -e "\033[31m              ║                                                        ║\033[0m"
-echo -e "\033[31m              ║  \033[34m   Verifique se os dados abaixos se estão certos      \033[31m║\033[0m"
+echo -e "\033[31m              ║  \033[34m   Verifique se os dados abaixos estão ccorretos      \033[31m║\033[0m"
 echo -e "\033[31m              ║                                                        ║\033[0m"
 echo -e "\033[31m              ╚════════════════════════════════════════════════════════╝\033[0m\n"
 echo ""
@@ -190,19 +188,17 @@ sudo -u postgres psql -d chatwoot_production -c "UPDATE installation_configs SET
 
 cd
 
-cd
-
 clear
 
-cd ~/instalador_T_N_E
+cd /home/ubuntu/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
 
-# Retorna para o instalador.sh
+# Retorna para o servidor.sh
 # Exibe uma mensagem de confirmação
 read -p "Deseja voltar para o MENU PRINCIPAL? (Y/N): " choice
 
 # Verifica a escolha do usuário
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ]; then
-  sudo chmod +x instalador.sh && ./instalador.sh
+  sudo chmod +x servidor.sh && ./servidor.sh
   echo "Comando executado."
 elif [ "$choice" == "N" ] || [ "$choice" == "n" ]; then
   echo "Comando não executado. Continuando..."
