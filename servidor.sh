@@ -21,9 +21,11 @@ echo -e "\e[32m\e[0m"
 # Exibe o banner informativo
 
 display_banner() {
-  echo -e "\e[32m             ===================================="
-  echo -e "                     Instalador Automático\e[0m"
-  echo -e "\e[32m             ====================================\e[0m"
+  echo -e "\n\033[31m              ╔════════════════════════════════════════════════════════╗\033[0m"
+  echo -e "\033[31m              ║                                                        ║\033[0m"
+  echo -e "\033[31m              ║  \033[34m            O destino está nas suas mãos              \033[31m║\033[0m"
+  echo -e "\033[31m              ║                                                        ║\033[0m"
+  echo -e "\033[31m              ╚════════════════════════════════════════════════════════╝\033[0m\n"
 }
 
 # Função para exibir o menu
