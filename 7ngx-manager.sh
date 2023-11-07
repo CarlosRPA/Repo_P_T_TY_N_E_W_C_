@@ -104,17 +104,17 @@ main
 
 cd
 
-cd
+clear
 
-cd /home/ubuntu/instalador_T_N_E
+cd /home/ubuntu/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
 
-# Retorna para o instalador.sh
+# Retorna para o servidor.sh
 # Exibe uma mensagem de confirmação
 read -p "Deseja voltar para o MENU PRINCIPAL? (Y/N): " choice
 
 # Verifica a escolha do usuário
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ]; then
-  sudo chmod +x instalador.sh && ./instalador.sh
+  sudo chmod +x servidor.sh && ./servidor.sh
   echo "Comando executado."
 elif [ "$choice" == "N" ] || [ "$choice" == "n" ]; then
   echo "Comando não executado. Continuando..."
