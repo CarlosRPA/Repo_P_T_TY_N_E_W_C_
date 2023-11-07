@@ -28,7 +28,7 @@ echo ""
 echo ""
 echo ""
 echo -e "\e[93mPasso \e[33m1/4\e[0m"
-read -p "Digite a versão que deseja instalar do N8N (ex. e recomendado: latest): " versionnn
+read -p "Digite a versão que deseja instalar do N8N (ex: latest | ex: 1.15.1): " versionnn
 echo ""
 echo -e "\e[93mPasso \e[33m2/4\e[0m"
 read -p "Digite o dominio para acessar o N8N (ex: n8n.dominio.com): " dominionn
@@ -44,13 +44,13 @@ echo ""
 
 # VERIFICAÇÃO DE DADOS
 
+clear
+
 echo -e "\n\033[31m              ╔════════════════════════════════════════════════════════╗\033[0m"
 echo -e "\033[31m              ║                                                        ║\033[0m"
-echo -e "\033[31m              ║  \033[34m   Verifique se os dados abaixos se estão certos      \033[31m║\033[0m"
+echo -e "\033[31m              ║  \033[34m   Verifique se os dados abaixos estão ccorretos      \033[31m║\033[0m"
 echo -e "\033[31m              ║                                                        ║\033[0m"
 echo -e "\033[31m              ╚════════════════════════════════════════════════════════╝\033[0m\n"
-
-clear
 
 echo ""
 echo -e "Link do N8N: \e[33m$dominionn\e[0m"
@@ -144,19 +144,17 @@ sudo pm2 startup ubuntu -u root && sudo pm2 startup ubuntu -u root --hp /root &&
 
 cd
 
-cd
-
 clear
 
-cd ~/instalador_T_N_E
+cd /home/ubuntu/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
 
-# Retorna para o instalador.sh
+# Retorna para o servidor.sh
 # Exibe uma mensagem de confirmação
 read -p "Deseja voltar para o MENU PRINCIPAL? (Y/N): " choice
 
 # Verifica a escolha do usuário
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ]; then
-  sudo chmod +x instalador.sh && ./instalador.sh
+  sudo chmod +x servidor.sh && ./servidor.sh
   echo "Comando executado."
 elif [ "$choice" == "N" ] || [ "$choice" == "n" ]; then
   echo "Comando não executado. Continuando..."
