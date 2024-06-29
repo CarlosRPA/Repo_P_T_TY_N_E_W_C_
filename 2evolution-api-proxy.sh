@@ -135,7 +135,7 @@ clear
 
 cd
 
-cd /home/ubuntu
+cd /home/
 
 echo "Clonando git e trocando para develop"
 
@@ -470,7 +470,7 @@ cd
 
 clear
 
-cd /home/ubuntu/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
+cd /home/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
 
 # Retorna para o servidor.sh
 # Exibe uma mensagem de confirmação
