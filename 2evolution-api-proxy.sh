@@ -397,13 +397,84 @@ EOL
 # Copie o arquivo env.yml para o diretório de destino
 cp evolution-api/env.yml evolution-api/src/env.yml
 
-sudo npm install
+sudo npm run start:prod
 
 echo "Iniciando pm2"
 
 sudo pm2 start 'npm run start:prod' --name ApiEvolution
 
-sudo pm2 startup ubuntu -u root && sudo pm2 startup ubuntu -u root --hp /root && sudo pm2 save --force
+sudo pm2 startup && sudo pm2 save --force
+
+#########################################################
+
+cd
+
+cd
+
+apt-get install -y nginx
+
+systemctl start nginx
+
+systemctl enable nginx
+
+rm /etc/nginx/sites-enabled/default
+
+nano /etc/nginx/conf.d/default.conf
+
+echo "Arquivo default"
+
+cat > default.conf << EOL
+server {
+  listen 80;
+  listen [::]:80;
+  server_name _;
+  root /var/www/html/;
+  index index.php index.html index.htm index.nginx-debian.html;
+
+location / {
+    try_files $uri $uri/ /index.php;
+  }
+
+location ~ \.php$ {
+    fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+    include snippets/fastcgi-php.conf;
+  }
+
+# Um longo tempo de cache do navegador pode acelerar visitas repetidas à sua página
+location ~* \.(jpg|jpeg|gif|png|webp|svg|woff|woff2|ttf|css|js|ico|xml)$ {
+       access_log off;
+       log_not_found off;
+       expires 360d;
+  }
+
+# desativar acesso a arquivos ocultos
+location ~ /\.ht {
+      access_log off;
+      log_not_found off;
+      deny all;
+  }
+}
+EOL
+
+#########################################################
+
+cd
+
+cd
+
+sudo mv default.conf /etc/nginx/conf.d/default.conf
+
+#########################################################
+
+cd
+
+cd
+
+systemctl reload nginx
+
+chown www-data:www-data /usr/share/nginx/html -R
 
 #########################################################
 
@@ -439,6 +510,8 @@ sudo mv api /etc/nginx/sites-available/api
 
 sudo ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
 
+sudo nginx -t
+
 sudo systemctl reload nginx
 
 #########################################################
@@ -448,6 +521,8 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 echo "proxy reverso da Evolution e do typebot"
+
+snap install --classic certbot
 
 sudo certbot --nginx --email $emaill --redirect --agree-tos -d $dominio 
 
