@@ -111,6 +111,30 @@ clear
 
 cd
 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# Carrege a fonte do bash para o ambiente
+source ~/.bashrc
+
+# Diretórios
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Isso carrega o nvm
+
+# Instala o node:
+nvm install v20.10.0 && nvm use v20.10.0
+
+#########################################################
+
+clear
+
+dpkg-reconfigure tzdata
+
+#########################################################
+
+clear
+
+cd
+
 cd /home/ubuntu
 
 echo "Clonando git e trocando para develop"
@@ -119,11 +143,17 @@ git clone https://github.com/EvolutionAPI/evolution-api.git
 
 cd evolution-api
 
+sudo npm install
+
 sudo git pull
 
 #git branch -a
 
 #git checkout develo
+
+#########################################################
+
+clear
 
 echo "Criando Env e Instalando com NPM"
 
@@ -133,6 +163,8 @@ SERVER:
   TYPE: http # https
   PORT: $porta # 443
   URL: https://$dominio
+  DISABLE_MANAGER: false
+  DISABLE_DOCS: false
 
 CORS:
   ORIGIN:
@@ -159,7 +191,7 @@ LOG:
     - DEBUG
     - INFO
     - LOG
-    - VERBOSE
+    # VERBOSE
     - DARK
     - WEBHOOKS
   COLOR: true
@@ -169,6 +201,15 @@ LOG:
 # Default time: 5 minutes
 # If you don't even want an expiration, enter the value false
 DEL_INSTANCE: false # or false
+DEL_TEMP_INSTANCES: true # Delete instances with status closed on start
+
+# Seesion Files Providers
+# Provider responsible for managing credentials files and WhatsApp sessions.
+PROVIDER:
+  ENABLED: false
+  HOST: 127.0.0.1
+  PORT: 5656
+  PREFIX: evolution
 
 # Temporary data storage
 STORE:
@@ -198,17 +239,54 @@ DATABASE:
     CONTACTS: false
     CHATS: false
 
-REDIS:
-  ENABLED: false
-  URI: "redis://localhost:6379"
-  PREFIX_KEY: "evolution"
-
 RABBITMQ:
   ENABLED: false
   URI: "amqp://guest:guest@localhost:5672"
+  EXCHANGE_NAME: evolution_exchange
+  GLOBAL_ENABLED: true
+  EVENTS:
+    APPLICATION_STARTUP: false
+    INSTANCE_CREATE: false
+    INSTANCE_DELETE: false
+    QRCODE_UPDATED: false
+    MESSAGES_SET: false
+    MESSAGES_UPSERT: true
+    MESSAGES_UPDATE: true
+    MESSAGES_DELETE: false
+    SEND_MESSAGE: false
+    CONTACTS_SET: false
+    CONTACTS_UPSERT: false
+    CONTACTS_UPDATE: false
+    PRESENCE_UPDATE: false
+    CHATS_SET: false
+    CHATS_UPSERT: false
+    CHATS_UPDATE: false
+    CHATS_DELETE: false
+    GROUPS_UPSERT: true
+    GROUP_UPDATE: true
+    GROUP_PARTICIPANTS_UPDATE: true
+    CONNECTION_UPDATE: true
+    CALL: false
+    # This events is used with Typebot
+    TYPEBOT_START: false
+    TYPEBOT_CHANGE_STATUS: false
 
-WEBSOCKET: 
+SQS:
+  ENABLED: true
+  ACCESS_KEY_ID: ""
+  SECRET_ACCESS_KEY: ""
+  ACCOUNT_ID: ""
+  REGION: "us-east-1"
+
+WEBSOCKET:
   ENABLED: false
+  GLOBAL_EVENTS: false
+
+WA_BUSINESS:
+  TOKEN_WEBHOOK: evolution
+  URL: https://graph.facebook.com
+  VERSION: v18.0
+  LANGUAGE: pt_BR
 
 # Global Webhook Settings
 # Each instance's Webhook URL and events will be requested at the time it is created
@@ -241,19 +319,57 @@ WEBHOOK:
     GROUP_UPDATE: true
     GROUP_PARTICIPANTS_UPDATE: true
     CONNECTION_UPDATE: true
+    LABELS_EDIT: true
+    LABELS_ASSOCIATION: true
     CALL: true
     # This event fires every time a new token is requested via the refresh route
     NEW_JWT_TOKEN: false
+    # This events is used with Typebot
+    TYPEBOT_START: false
+    TYPEBOT_CHANGE_STATUS: false
+    # This event is used with Chama AI
+    CHAMA_AI_ACTION: false
+    # This event is used to send errors to the webhook
+    ERRORS: false
+    ERRORS_WEBHOOK: <url>
 
 CONFIG_SESSION_PHONE:
   # Name that will be displayed on smartphone connection
   CLIENT: "$client"
-  NAME: chrome # chrome | firefox | edge | opera | safari
+  NAME: Chrome # Chrome | Firefox | Edge | Opera | Safari
 
 # Set qrcode display limit
 QRCODE:
   LIMIT: 30
-  COLOR: '#198754'
+  COLOR: "#198754"
+
+TYPEBOT:
+  API_VERSION: "old" # old | latest
+  KEEP_OPEN: false
+
+CHATWOOT:
+  # If you leave this option as false, when deleting the message for everyone on WhatsApp, it will not be deleted on Chatwoot.
+  MESSAGE_DELETE: true # false | true
+  # If you leave this option as true, when sending a message in Chatwoot, the client's last message will be marked as read on WhatsApp.
+  MESSAGE_READ: false # false | true
+  IMPORT:
+    # This db connection is used to import messages from whatsapp to chatwoot database
+    DATABASE:
+      CONNECTION:
+        URI: "postgres://user:password@hostname:port/dbname?sslmode=disable"
+    PLACEHOLDER_MEDIA_MESSAGE: true
+
+# Cache to optimize application performance
+CACHE:
+  REDIS:
+    ENABLED: false
+    URI: "redis://localhost:6379"
+    PREFIX_KEY: "evolution"
+    TTL: 604800
+    SAVE_INSTANCES: false
+  LOCAL:
+    ENABLED: false
+    TTL: 86400
 
 # Defines an authentication type for the api
 # We recommend using the apikey because it will allow you to use a custom token,
@@ -269,7 +385,10 @@ AUTHENTICATION:
   # Set the secret key to encrypt and decrypt your token and its expiration time.
   JWT:
     EXPIRIN_IN: 0 # seconds - 3600s === 1h | zero (0) - never expires
-    SECRET: L=6544120E713976
+    SECRET: L=0YWt]b2w[WF>#>:&E`
+
+LANGUAGE: "pt-BR" # pt-BR, en
+
 EOL
 
 
@@ -284,7 +403,7 @@ echo "Iniciando pm2"
 
 sudo pm2 start 'npm run start:prod' --name ApiEvolution
 
-sudo pm2 startup ubuntu -u root && sudo pm2 startup ubuntu -u root --hp /root && sudo pm2 save
+sudo pm2 startup ubuntu -u root && sudo pm2 startup ubuntu -u root --hp /root && sudo pm2 save --force
 
 #########################################################
 
