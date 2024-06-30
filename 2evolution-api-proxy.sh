@@ -93,10 +93,6 @@ done
 
 echo "Instalando as Dependencias"
 
-sudo npm install -g npm@latest --force
-
-sudo npm install -g pm2@latest --force
-
 sudo apt install -y git zip unzip nload snapd curl wget sudo
 
 sudo apt update
@@ -135,7 +131,7 @@ clear
 
 cd
 
-cd /home/
+cd /home
 
 echo "Clonando git e trocando para develop"
 
@@ -143,7 +139,7 @@ git clone https://github.com/EvolutionAPI/evolution-api.git
 
 cd evolution-api
 
-sudo npm install
+sudo npm install -g npm@latest --force
 
 sudo git pull
 
@@ -152,6 +148,10 @@ sudo git pull
 #git checkout develo
 
 #########################################################
+
+cd
+
+cd /home/evolution-api
 
 clear
 
@@ -394,16 +394,24 @@ EOL
 
 #########################################################
 
+cd
+
+cd /home
+
 # Copie o arquivo env.yml para o diretório de destino
 cp evolution-api/env.yml evolution-api/src/env.yml
 
-sudo npm run start:prod
+cd evolution-api
+
+npm run start:prod
 
 echo "Iniciando pm2"
 
-sudo pm2 start 'npm run start:prod' --name ApiEvolution
+sudo npm install -g pm2@latest --force
 
-sudo pm2 startup && sudo pm2 save --force
+pm2 start 'npm run start:prod' --name ApiEvolution
+
+pm2 startup && sudo pm2 save --force
 
 #########################################################
 
@@ -419,7 +427,13 @@ systemctl enable nginx
 
 rm /etc/nginx/sites-enabled/default
 
-nano /etc/nginx/conf.d/default.conf
+rm /etc/nginx/conf.d/default.conf
+
+#########################################################
+
+cd
+
+cd
 
 echo "Arquivo default"
 
@@ -508,7 +522,9 @@ cd
 
 sudo mv api /etc/nginx/sites-available/api
 
-sudo ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
+systemctl reload nginx
+
+chown www-data:www-data /usr/share/nginx/html -R
 
 sudo nginx -t
 
