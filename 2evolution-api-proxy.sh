@@ -107,6 +107,8 @@ clear
 
 cd
 
+cd /home
+
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 # Carrege a fonte do bash para o ambiente
@@ -123,7 +125,7 @@ nvm install v20.10.0 && nvm use v20.10.0
 
 clear
 
-dpkg-reconfigure tzdata
+sudo timedatectl set-timezone America/Sao_Paulo
 
 #########################################################
 
@@ -151,7 +153,7 @@ sudo git pull
 
 cd
 
-cd /home/evolution-api
+cd /home/evolution-api/src
 
 clear
 
@@ -391,17 +393,11 @@ LANGUAGE: "pt-BR" # pt-BR, en
 
 EOL
 
-
 #########################################################
 
 cd
 
-cd /home
-
-# Copie o arquivo env.yml para o diretório de destino
-cp evolution-api/env.yml evolution-api/src/env.yml
-
-cd evolution-api
+cd /home/evolution-api
 
 npm run start:prod
 
@@ -425,6 +421,8 @@ systemctl start nginx
 
 systemctl enable nginx
 
+systemctl status nginx
+
 rm /etc/nginx/sites-enabled/default
 
 rm /etc/nginx/conf.d/default.conf
@@ -433,7 +431,7 @@ rm /etc/nginx/conf.d/default.conf
 
 cd
 
-cd
+cd /etc/nginx/conf.d/
 
 echo "Arquivo default"
 
@@ -478,14 +476,6 @@ cd
 
 cd
 
-sudo mv default.conf /etc/nginx/conf.d/default.conf
-
-#########################################################
-
-cd
-
-cd
-
 systemctl reload nginx
 
 chown www-data:www-data /usr/share/nginx/html -R
@@ -494,7 +484,7 @@ chown www-data:www-data /usr/share/nginx/html -R
 
 cd
 
-cd
+cd /etc/nginx/sites-available
 
 echo "Proxy Reverso"
 
@@ -520,15 +510,13 @@ EOL
 
 cd
 
-sudo mv api /etc/nginx/sites-available/api
-
-systemctl reload nginx
+ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
 
 chown www-data:www-data /usr/share/nginx/html -R
 
-sudo nginx -t
+nginx -t
 
-sudo systemctl reload nginx
+systemctl reload nginx
 
 #########################################################
 
