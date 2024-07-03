@@ -91,44 +91,6 @@ done
 
 #########################################################
 
-echo "Instalando as Dependencias"
-
-sudo apt install -y git zip unzip nload snapd curl wget sudo
-
-sudo apt update
-
-sudo apt upgrade -y
-
-sleep 6
-
-#########################################################
-
-clear
-
-cd
-
-cd /home
-
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
-# Carrege a fonte do bash para o ambiente
-source ~/.bashrc
-
-# Diretórios
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Isso carrega o nvm
-
-# Instala o node:
-nvm install v20.10.0 && nvm use v20.10.0
-
-#########################################################
-
-clear
-
-sudo timedatectl set-timezone America/Sao_Paulo
-
-#########################################################
-
 clear
 
 cd
@@ -415,16 +377,7 @@ cd
 
 cd
 
-apt-get install -y nginx
-
-systemctl start nginx
-
-systemctl enable nginx
-
-systemctl status nginx
-
-rm /etc/nginx/sites-enabled/default
-
+# Remove a configuração padrão do Nginx
 rm /etc/nginx/conf.d/default.conf
 
 #########################################################
