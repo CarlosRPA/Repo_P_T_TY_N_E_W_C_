@@ -39,7 +39,7 @@ sudo apt-get upgrade -y
 clear
 
 echo ""
-read -p "Digite a versão da sua escolha para o Node.js (ex:'18') " versionn
+read -p "Digite a versão da sua escolha para o Node.js (ex:'20') " versionn
 echo ""
 
 # Adiciona o repositório Node.js
@@ -50,15 +50,6 @@ echo "deb https://deb.nodesource.com/node_$versionn.x nodistro main" | sudo tee 
 
 # Atualiza os repositórios após adicionar o repositório do Node.js
 sudo apt-get update
-
-# Instala o Node.js
-sudo apt-get install nodejs -y
-
-# Atualiza o npm
-sudo npm install -g npm@latest --force
-
-# Instala o PM2
-sudo npm install -g pm2@latest --force
 
 # Instala ferramentas úteis
 sudo apt-get install -y git zip unzip nload snapd curl wget sudo
@@ -71,6 +62,9 @@ sudo apt-get install docker-compose -y
 
 # Instala o Nginx
 sudo apt-get install nginx -y
+sudo systemctl start nginx
+systemctl enable nginx
+systemctl status nginx
 
 # Instala o Certbot e o plugin para o Nginx
 sudo apt-get install certbot python3-certbot-nginx -y
@@ -175,7 +169,7 @@ cd
 
 clear
 
-cd /home/ubuntu/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
+cd /home/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
 
 # Retorna para o servidor.sh
 # Exibe uma mensagem de confirmação
