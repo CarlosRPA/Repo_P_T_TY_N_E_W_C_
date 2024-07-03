@@ -121,18 +121,19 @@ clear
 
 echo "Criando Env e Instalando com NPM"
 
-cat > env.yml << EOL
-# Choose the server type for the application
+sudo touch env.yml
+
+echo "# Choose the server type for the application
 SERVER:
   TYPE: http # https
-  PORT: $porta # 443
-  URL: https://$dominio
+  PORT: \$porta # 443
+  URL: https://\$dominio
   DISABLE_MANAGER: false
   DISABLE_DOCS: false
 
 CORS:
   ORIGIN:
-    - "*"
+    - \"*\"
     # - yourdomain.com
   METHODS:
     - POST
@@ -193,7 +194,7 @@ CLEAN_STORE:
 DATABASE:
   ENABLED: false
   CONNECTION:
-    URI: "mongodb://root:root@localhost:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true"
+    URI: \"mongodb://root:root@localhost:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true\"
     DB_PREFIX_NAME: evolution
   # Choose the data you want to save in the application's database or store
   SAVE_DATA:
@@ -205,7 +206,7 @@ DATABASE:
 
 RABBITMQ:
   ENABLED: false
-  URI: "amqp://guest:guest@localhost:5672"
+  URI: \"amqp://guest:guest@localhost:5672\"
   EXCHANGE_NAME: evolution_exchange
   GLOBAL_ENABLED: true
   EVENTS:
@@ -237,10 +238,10 @@ RABBITMQ:
 
 SQS:
   ENABLED: true
-  ACCESS_KEY_ID: ""
-  SECRET_ACCESS_KEY: ""
-  ACCOUNT_ID: ""
-  REGION: "us-east-1"
+  ACCESS_KEY_ID: \"\"
+  SECRET_ACCESS_KEY: \"\"
+  ACCOUNT_ID: \"\"
+  REGION: \"us-east-1\"
 
 WEBSOCKET:
   ENABLED: false
@@ -299,16 +300,16 @@ WEBHOOK:
 
 CONFIG_SESSION_PHONE:
   # Name that will be displayed on smartphone connection
-  CLIENT: "$client"
+  CLIENT: \$client
   NAME: Chrome # Chrome | Firefox | Edge | Opera | Safari
 
 # Set qrcode display limit
 QRCODE:
   LIMIT: 30
-  COLOR: "#198754"
+  COLOR: \"#198754\"
 
 TYPEBOT:
-  API_VERSION: "old" # old | latest
+  API_VERSION: \"old\" # old | latest
   KEEP_OPEN: false
 
 CHATWOOT:
@@ -320,15 +321,15 @@ CHATWOOT:
     # This db connection is used to import messages from whatsapp to chatwoot database
     DATABASE:
       CONNECTION:
-        URI: "postgres://user:password@hostname:port/dbname?sslmode=disable"
+        URI: \"postgres://user:password@hostname:port/dbname?sslmode=disable\"
     PLACEHOLDER_MEDIA_MESSAGE: true
 
 # Cache to optimize application performance
 CACHE:
   REDIS:
     ENABLED: false
-    URI: "redis://localhost:6379"
-    PREFIX_KEY: "evolution"
+    URI: \"redis://localhost:6379\"
+    PREFIX_KEY: \"evolution\"
     TTL: 604800
     SAVE_INSTANCES: false
   LOCAL:
@@ -343,17 +344,16 @@ AUTHENTICATION:
   # Define a global apikey to access all instances
   API_KEY:
     # OBS: This key must be inserted in the request header to create an instance.
-    KEY: $keyy
+    KEY: \$keyy
   # Expose the api key on return from fetch instances
   EXPOSE_IN_FETCH_INSTANCES: true
   # Set the secret key to encrypt and decrypt your token and its expiration time.
   JWT:
     EXPIRIN_IN: 0 # seconds - 3600s === 1h | zero (0) - never expires
-    SECRET: L=0YWt]b2w[WF>#>:&E`
+    SECRET: L=0YWt]b2w[WF>#>:&E\`
 
-LANGUAGE: "pt-BR" # pt-BR, en
-
-EOL
+LANGUAGE: \"pt-BR\" # pt-BR, en
+" > env.yml
 
 #########################################################
 
@@ -388,7 +388,9 @@ cd /etc/nginx/conf.d/
 
 echo "Arquivo default"
 
-cat > default.conf << EOL
+sudo touch default.conf
+
+echo "
 server {
   listen 80;
   listen [::]:80;
@@ -421,7 +423,7 @@ location ~ /\.ht {
       deny all;
   }
 }
-EOL
+" > default.conf
 
 #########################################################
 
