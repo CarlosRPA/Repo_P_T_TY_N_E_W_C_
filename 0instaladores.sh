@@ -41,7 +41,7 @@ sudo apt-get upgrade -y
 clear
 
 echo ""
-read -p "Digite a versão da sua escolha para o Node.js (ex:'20') " versionn
+read -p "Digite a versão da sua escolha para o Node.js (ex:'20')" versionn
 echo ""
 
 # Adiciona o repositório Node.js
