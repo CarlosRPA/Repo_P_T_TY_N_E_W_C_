@@ -56,7 +56,7 @@ while true; do
     prompt_input "Digite o nome da sua Empresa (ex: RPA)" client
     echo ""
     echo "ATENÇÃO ⚠️ CRIE UM TOKEN DE 32 CARACTERES OU USE O QUE JA ESTÁ AQUI ⚠️: https://codebeautify.org/generate-random-hexadecimal-numbers"
-    prompt_input "Já foi gerado uma ApiKey Global automaticamente ( Pode copiar: $key):" keyy    
+    prompt_input "Já foi gerado uma ApiKey Global automaticamente ( Pode copiar: $key)" keyy    
     
 
     # Pergunte ao usuário se as informações estão corretas
