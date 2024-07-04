@@ -126,8 +126,8 @@ sudo touch env.yml
 echo "# Choose the server type for the application
 SERVER:
   TYPE: http # https
-  PORT: \$porta # 443
-  URL: https://\$dominio
+  PORT: $porta # 443
+  URL: https://$dominio
   DISABLE_MANAGER: false
   DISABLE_DOCS: false
 
@@ -300,7 +300,7 @@ WEBHOOK:
 
 CONFIG_SESSION_PHONE:
   # Name that will be displayed on smartphone connection
-  CLIENT: \$client
+  CLIENT: "$client"
   NAME: Chrome # Chrome | Firefox | Edge | Opera | Safari
 
 # Set qrcode display limit
@@ -344,7 +344,7 @@ AUTHENTICATION:
   # Define a global apikey to access all instances
   API_KEY:
     # OBS: This key must be inserted in the request header to create an instance.
-    KEY: \$keyy
+    KEY: $keyy
   # Expose the api key on return from fetch instances
   EXPOSE_IN_FETCH_INSTANCES: true
   # Set the secret key to encrypt and decrypt your token and its expiration time.
@@ -361,15 +361,15 @@ cd
 
 cd /home/evolution-api
 
-npm run start:prod
+sudo npm run start:prod
 
 echo "Iniciando pm2"
 
 sudo npm install -g pm2@latest --force
 
-pm2 start 'npm run start:prod' --name ApiEvolution
+sudo pm2 start 'npm run start:prod' --name ApiEvolution
 
-pm2 startup && sudo pm2 save --force
+sudo pm2 startup && sudo pm2 save --force
 
 #########################################################
 
@@ -378,7 +378,7 @@ cd
 cd
 
 # Remove a configuração padrão do Nginx
-rm /etc/nginx/conf.d/default.conf
+sudo rm /etc/nginx/conf.d/default.conf
 
 #########################################################
 
@@ -431,9 +431,9 @@ cd
 
 cd
 
-systemctl reload nginx
+sudo systemctl reload nginx
 
-chown www-data:www-data /usr/share/nginx/html -R
+sudo chown www-data:www-data /usr/share/nginx/html -R
 
 #########################################################
 
@@ -465,13 +465,13 @@ EOL
 
 cd
 
-ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
 
-chown www-data:www-data /usr/share/nginx/html -R
+sudo chown www-data:www-data /usr/share/nginx/html -R
 
-nginx -t
+sudo nginx -t
 
-systemctl reload nginx
+sudo systemctl reload nginx
 
 #########################################################
 
@@ -481,7 +481,7 @@ sudo apt-get upgrade -y
 
 echo "proxy reverso da Evolution e do typebot"
 
-snap install --classic certbot
+sudo snap install --classic certbot
 
 sudo certbot --nginx --email $emaill --redirect --agree-tos -d $dominio 
 
@@ -500,9 +500,9 @@ echo "Sua ApiKey Global: $keyy"
 echo ""
 echo ""
 
-cd
+#########################################################
 
-clear
+cd
 
 cd /home/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
 
