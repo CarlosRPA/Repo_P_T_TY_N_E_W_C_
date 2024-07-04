@@ -28,6 +28,8 @@ echo ""
 
 ######################################################################
 
+cd
+
 # Atualiza os repositórios
 sudo apt-get update
 
@@ -51,14 +53,26 @@ echo "deb https://deb.nodesource.com/node_$versionn.x nodistro main" | sudo tee 
 # Atualiza os repositórios após adicionar o repositório do Node.js
 sudo apt-get update
 
+######################################################################
+
+cd
+
 # Instala ferramentas úteis
 sudo apt-get install -y git zip unzip nload snapd curl wget sudo
+
+######################################################################
 
 # Define o fuso horário
 sudo timedatectl set-timezone America/Sao_Paulo
 
+######################################################################
+
 # Instala o Docker Compose
 sudo apt-get install docker-compose -y
+
+######################################################################
+
+cd
 
 # Instala o Nginx
 sudo apt-get install nginx -y
@@ -66,14 +80,18 @@ sudo systemctl start nginx
 systemctl enable nginx
 systemctl status nginx
 
+# Remove a configuração padrão do Nginx
+sudo rm /etc/nginx/sites-enabled/default
+
+######################################################################
+
+cd
+
 # Instala o Certbot e o plugin para o Nginx
 sudo apt-get install certbot python3-certbot-nginx -y
 
 # Instala o Certbot via Snap (opcional)
 sudo snap install --classic certbot
-
-# Remove a configuração padrão do Nginx
-sudo rm /etc/nginx/sites-enabled/default
 
 #######################################################
 
@@ -86,7 +104,6 @@ sudo rm -f nginx.conf
 
 # Crie o arquivo nginx.conf com o conteúdo desejado automaticamente
 sudo tee nginx.conf > /dev/null <<EOL
-
 user www-data;
 worker_processes auto;
 pid /run/nginx.pid;
@@ -151,6 +168,8 @@ http {
         include /etc/nginx/sites-enabled/*;
 }
 EOL
+
+#######################################################
 
 # Atualiza os repositórios
 sudo apt-get update
