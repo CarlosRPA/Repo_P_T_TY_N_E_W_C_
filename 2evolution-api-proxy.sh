@@ -103,7 +103,7 @@ git clone https://github.com/EvolutionAPI/evolution-api.git
 
 cd evolution-api
 
-sudo npm install -g npm@latest --force
+apt install npm -f
 
 sudo git pull
 
