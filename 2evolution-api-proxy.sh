@@ -429,11 +429,9 @@ location ~ /\.ht {
 
 cd
 
-cd
+systemctl reload nginx
 
-sudo systemctl reload nginx
-
-sudo chown www-data:www-data /usr/share/nginx/html -R
+chown www-data:www-data /usr/share/nginx/html -R
 
 #########################################################
 
@@ -465,13 +463,13 @@ EOL
 
 cd
 
-sudo ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
+ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
 
-sudo chown www-data:www-data /usr/share/nginx/html -R
+chown www-data:www-data /usr/share/nginx/html -R
 
-sudo nginx -t
+nginx -t
 
-sudo systemctl reload nginx
+systemctl reload nginx
 
 #########################################################
 
