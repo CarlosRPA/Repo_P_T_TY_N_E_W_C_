@@ -40,15 +40,21 @@ sudo apt-get upgrade -y
 
 clear
 
-echo ""
-read -p "Digite a versão da sua escolha para o Node.js (ex:'20')" versionn
-echo ""
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-# Adiciona o repositório Node.js
-sudo apt-get install -y ca-certificates curl gnupg
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/nodesource.gpg
+######################################################################
 
-echo "deb https://deb.nodesource.com/node_$versionn.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+clear
+
+# Carrege a fonte do bash para o ambiente
+source ~/.bashrc
+
+# Diretórios
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Isso carrega o nvm
+
+# Instala o node:
+nvm install v20.15.1 && nvm use v20.15.1
 
 # Atualiza os repositórios após adicionar o repositório do Node.js
 sudo apt-get update
@@ -69,29 +75,6 @@ sudo timedatectl set-timezone America/Sao_Paulo
 
 # Instala o Docker Compose
 sudo apt-get install docker-compose -y
-
-######################################################################
-
-cd
-
-# Instala o Nginx
-sudo apt-get install nginx -y
-sudo systemctl start nginx
-systemctl enable nginx
-systemctl status nginx
-
-# Remove a configuração padrão do Nginx
-sudo rm /etc/nginx/sites-enabled/default
-
-######################################################################
-
-cd
-
-# Instala o Certbot e o plugin para o Nginx
-sudo apt-get install certbot python3-certbot-nginx -y
-
-# Instala o Certbot via Snap (opcional)
-sudo snap install --classic certbot
 
 #######################################################
 
@@ -183,6 +166,16 @@ sudo systemctl reload nginx
 sudo systemctl restart nginx
 
 #######################################################
+
+cd
+
+# Instala o Certbot e o plugin para o Nginx
+sudo apt-get install certbot python3-certbot-nginx -y
+
+# Instala o Certbot via Snap
+sudo snap install --classic certbot
+
+######################################################################
 
 cd
 
