@@ -90,6 +90,51 @@ while true; do
 done
 
 #########################################################
+clear
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+######################################################################
+
+clear
+
+# Carrege a fonte do bash para o ambiente
+source ~/.bashrc
+
+# Diretórios
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Isso carrega o nvm
+
+# Instala o node:
+nvm install v20.15.1 && nvm use v20.15.1
+
+# Atualiza os repositórios após adicionar o repositório do Node.js
+apt-get update
+
+######################################################################
+
+# Define o fuso horário
+sudo timedatectl set-timezone America/Sao_Paulo
+
+######################################################################
+
+cd
+
+apt-get install -y nginx
+systemctl start nginx
+systemctl enable nginx
+systemctl status nginx
+
+#########################################################
+
+cd
+
+cd
+
+# Instala ferramentas úteis
+apt-get install -y git zip unzip nload snapd curl wget sudo
+
+#########################################################
 
 clear
 
@@ -105,7 +150,7 @@ cd evolution-api
 
 apt install npm -f
 
-sudo git pull
+git pull
 
 #git branch -a
 
@@ -361,15 +406,15 @@ cd
 
 cd /home/evolution-api
 
-sudo npm run start:prod
+npm run start:prod
 
 echo "Iniciando pm2"
 
-sudo npm install -g pm2@latest --force
+npm install -g pm2@latest --force
 
-sudo pm2 start 'npm run start:prod' --name ApiEvolution
+pm2 start 'npm run start:prod' --name ApiEvolution
 
-sudo pm2 startup && sudo pm2 save --force
+pm2 startup && sudo pm2 save --force
 
 #########################################################
 
@@ -378,7 +423,7 @@ cd
 cd
 
 # Remove a configuração padrão do Nginx
-sudo rm /etc/nginx/conf.d/default.conf
+rm /etc/nginx/conf.d/default.conf
 
 #########################################################
 
@@ -465,23 +510,21 @@ cd
 
 ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled
 
-chown www-data:www-data /usr/share/nginx/html -R
-
 nginx -t
 
 systemctl reload nginx
 
 #########################################################
 
-sudo apt-get update
+apt-get update
 
-sudo apt-get upgrade -y
+apt-get upgrade -y
 
 echo "proxy reverso da Evolution e do typebot"
 
-sudo snap install --classic certbot
+snap install --classic certbot
 
-sudo certbot --nginx --email $emaill --redirect --agree-tos -d $dominio 
+certbot --nginx --email $emaill --redirect --agree-tos -d $dominio 
 
 #########################################################
 
