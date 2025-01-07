@@ -237,12 +237,12 @@ services:
   minio:
     labels:
       virtual.host: '$storage' # Troque pelo seu dominio ou subdominio
-      virtual.port: '9000' #$portastorage
+      virtual.port: '$portastorage' #9000
       virtual.tls-email: '$email' # Troque pelo seu email
     image: minio/minio
     command: server /data
     ports:
-      - '9000:9000'
+      - '$portastorage:9000'
     environment:
       MINIO_ROOT_USER: minio # Troque se necessario - Deve ser Igual ao Declarado no Typebot Builder S3_ACCESS_KEY=
       MINIO_ROOT_PASSWORD: minio123 # Troque se necessario - Deve ser Igual ao Declarado no Typebot Builder S3_SECRET_KEY=
@@ -258,7 +258,7 @@ services:
     entrypoint: >
       /bin/sh -c "
       sleep 10;
-      /usr/bin/mc config host add minio http://minio:9000 minio minio123;
+      /usr/bin/mc config host add minio http://minio:$portastorage minio minio123;
       /usr/bin/mc mb minio/typebot;
       /usr/bin/mc anonymous set public minio/typebot/public;
       exit 0;
@@ -424,7 +424,7 @@ cd
 
 clear
 
-cd /home/ubuntu/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
+cd /home/install_P_T_TY_N_E_W_C_/Servidor_TY_E_A_C_W_N_N_
 
 # Retorna para o servidor.sh
 # Exibe uma mensagem de confirmação
