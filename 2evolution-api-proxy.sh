@@ -106,7 +106,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Isso carrega o nvm
 
 # Instala o node:
-nvm install v20.15.1 && nvm use v20.15.1
+nvm install v20.18.1 && nvm use v20.18.1
 
 # Atualiza os repositórios após adicionar o repositório do Node.js
 apt-get update
