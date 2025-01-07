@@ -12,7 +12,7 @@ cd
 cd
 
 # Baixa o instalador do Whaticket
-sudo apt install -y git && git clone https://github.com/CarlosRPA/install_WT_RPA.git
+sudo apt install -y git && git clone https://github.com/CarlosRPA/Ins_WT.git
 
 # Dá permissões de execução ao script de instalação
 sudo chmod -R 777 install_WT_RPA
